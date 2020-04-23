@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const AddMovie = props => {
@@ -7,13 +7,11 @@ const AddMovie = props => {
         title: "",
         director: "",
         metascore: "",
-        stars: ["", "", ""]
+        stars: []
     }
 
     const { push } = useHistory();
     const [movie, setMovie] = useState(initialMovie);
-    const { id } = useParams();
-
 
     const changeHandler = ev => {
         ev.persist();
@@ -31,13 +29,14 @@ const AddMovie = props => {
     const starsChangeHandler = ev => {
         ev.persist();
         let value = ev.target.value;
-        let index = parseInt(ev.target.id, 10)
+        let index = parseInt(ev.target.id, 10);
+        let newArray = [...movie.stars]
+        newArray[index] = `${value}`;
     
         setMovie({
           ...movie,
           stars: [
-              ...movie.stars,
-              movie.stars[index] = `${value}`
+              ...newArray
           ]
         });
     };

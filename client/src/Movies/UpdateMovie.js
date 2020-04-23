@@ -7,7 +7,7 @@ const UpdateMovie = props => {
         title: "",
         director: "",
         metascore: "",
-        stars: ["", "", ""]
+        stars: []
     }
 
     const { push } = useHistory();
@@ -41,13 +41,14 @@ const UpdateMovie = props => {
     const starsChangeHandler = ev => {
         ev.persist();
         let value = ev.target.value;
-        let index = parseInt(ev.target.id, 10)
+        let index = parseInt(ev.target.id, 10);
+        let newArray = [...movie.stars]
+        newArray[index] = `${value}`;
     
         setMovie({
           ...movie,
           stars: [
-              ...movie.stars,
-              movie.stars[index] = `${value}`
+              ...newArray
           ]
         });
     };
